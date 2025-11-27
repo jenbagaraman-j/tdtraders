@@ -1,3 +1,28 @@
+// Hamburger Menu Toggle
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('navMenu');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+
+// Close menu when clicking on a nav link
+document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    });
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    }
+});
+
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -84,49 +109,3 @@ window.addEventListener('load', () => {
         document.body.style.opacity = '1';
     }, 100);
 });
-
-// Mobile menu toggle (if you want to add hamburger menu later)
-const createMobileMenu = () => {
-    const nav = document.querySelector('.nav-menu');
-    const navContainer = document.querySelector('.nav .container');
-
-    // Create hamburger button for mobile
-    const hamburger = document.createElement('button');
-    hamburger.className = 'hamburger';
-    hamburger.innerHTML = '☰';
-    hamburger.style.cssText = `
-        display: none;
-        background: none;
-        border: none;
-        font-size: 1.8rem;
-        color: var(--primary-color);
-        cursor: pointer;
-    `;
-
-    // Add responsive behavior
-    const mediaQuery = window.matchMedia('(max-width: 768px)');
-
-    const handleMediaChange = (e) => {
-        if (e.matches) {
-            hamburger.style.display = 'block';
-            nav.style.display = 'none';
-        } else {
-            hamburger.style.display = 'none';
-            nav.style.display = 'flex';
-        }
-    };
-
-    hamburger.addEventListener('click', () => {
-        if (nav.style.display === 'none' || nav.style.display === '') {
-            nav.style.display = 'flex';
-        } else {
-            nav.style.display = 'none';
-        }
-    });
-
-    mediaQuery.addListener(handleMediaChange);
-    handleMediaChange(mediaQuery);
-};
-
-// Initialize mobile menu
-createMobileMenu();
