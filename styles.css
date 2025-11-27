@@ -103,6 +103,42 @@ body {
     width: 100%;
 }
 
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+    margin-left: auto;
+}
+
+.hamburger span {
+    width: 30px;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
 /* Hero Section */
 .hero {
     margin-top: 70px;
@@ -383,12 +419,17 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
     .nav .container {
         flex-direction: row;
         flex-wrap: wrap;
         gap: 1rem;
         padding-left: 10px;
         padding-right: 10px;
+        position: relative;
     }
 
     .logo {
@@ -401,15 +442,39 @@ body {
     }
 
     .nav-menu {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 1rem;
-        justify-content: flex-end;
-        font-size: 0.9rem;
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--bg-white);
+        flex-direction: column;
+        gap: 0;
+        padding: 20px;
+        box-shadow: var(--shadow-lg);
+        width: 100%;
+        z-index: 999;
+    }
+
+    .nav-menu.active {
+        display: flex;
     }
 
     .nav-menu li {
-        flex-shrink: 0;
+        width: 100%;
+        text-align: center;
+        padding: 12px 0;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .nav-menu li:last-child {
+        border-bottom: none;
+    }
+
+    .nav-menu a {
+        font-size: 1rem;
+        display: block;
+        padding: 8px;
     }
 
     .hero {
@@ -446,7 +511,7 @@ body {
 @media (max-width: 480px) {
     .nav .container {
         padding-left: 5px;
-        padding-right: 5px;
+        padding-right: 10px;
     }
 
     .logo img {
@@ -454,9 +519,13 @@ body {
         max-width: 120px;
     }
 
-    .nav-menu {
-        gap: 0.5rem;
-        font-size: 0.8rem;
+    .hamburger {
+        width: 28px;
+        height: 22px;
+    }
+
+    .hamburger span {
+        width: 28px;
     }
 
     .hero-title {
